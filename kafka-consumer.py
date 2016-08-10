@@ -1,21 +1,14 @@
 import logging, time
-
 from kafka import KafkaConsumer
 
-from workers.worker1 import printNumbers
+from workers.crawl_worker import crawl
+from config.env import get_config
+from app.constants import constants as COMMON_CONSTANTS
 
-
-if __name__ == "__main__":
-    logging.basicConfig(
-        format='%(asctime)s.%(msecs)s:%(name)s:%(thread)d:%(levelname)s:%(process)d:%(message)s',
-        level=logging.INFO
-        )
-
-consumer = KafkaConsumer(bootstrap_servers='localhost:9092',
-                         auto_offset_reset='earliest')
+consumer = KafkaConsumer(bootstrap_servers=get_config().KAFAK_BOOSTRAP_SERVERS,
+                         auto_offset_reset=get_config().KAFKA_AUTO_OFFSET_REST)
 
 while True:
-    consumer.subscribe(['craw-url'])
-
+    consumer.subscribe(COMMON_CONSTANTS.KAFKA_CRAWL_TOPIC)
     for message in consumer:
-        printNumbers.delay()
+        crawl.delay(message)

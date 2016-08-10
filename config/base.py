@@ -2,7 +2,7 @@ import os
 
 class BaseConfig(object):
 
-   PROJECT = "app"
+   PROJECT_NAME = "app"
 
    # Get app root path, also can use flask.root_path.
    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -14,3 +14,5 @@ class BaseConfig(object):
 
    # http://flask.pocoo.org/docs/quickstart/#sessions
    SECRET_KEY = 'secret key'
+
+   KAFKA_AUTO_OFFSET_REST = 'earliest'

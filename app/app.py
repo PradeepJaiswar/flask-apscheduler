@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 
-from config.base import BaseConfig
+from config.env import get_config
 from .constants import constants as COMMON_CONSTANTS
 from api import api_blueprint
 
@@ -10,14 +10,15 @@ from flask_cors import CORS
 # For import *
 __all__ = ['create_app']
 
-def create_app(config=None, app_name=None, blueprints=None):
+def create_app():
    """Create a Flask app."""
 
-   if app_name is None:
-     app_name = BaseConfig.PROJECT
+   #get Enviroment config
+   appConfig = get_config()
 
-   app = Flask(app_name, instance_path=COMMON_CONSTANTS.INSTANCE_FOLDER_PATH, instance_relative_config=True)
-   configure_app(app, config)
+   #create flask app
+   app = Flask(appConfig.PROJECT_NAME, instance_path=COMMON_CONSTANTS.INSTANCE_FOLDER_PATH, instance_relative_config=True)
+   configure_app(app, appConfig)
    configure_hook(app)
    register_blueprints(app)
    configure_extensions(app)
@@ -30,7 +31,7 @@ def configure_app(app, config=None):
    """Different ways of configurations."""
 
    # http://flask.pocoo.org/docs/api/#configuration
-   app.config.from_object(BaseConfig)
+   #app.config.from_object(BaseConfig)
 
    if config:
      app.config.from_object(config)
