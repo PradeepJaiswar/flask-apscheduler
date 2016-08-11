@@ -12,5 +12,7 @@ def get_config():
       'STAGING'   : StagingConfig,
       'PRODUCTION': ProdConfig
    }
-   #return SWITCH[os.environ.get('ENV')]
-   return SWITCH['DEV']
+   if os.environ.get('APP_ENV'):
+      return SWITCH[os.environ.get('APP_ENV')]
+   else:
+      return SWITCH['DEV']
