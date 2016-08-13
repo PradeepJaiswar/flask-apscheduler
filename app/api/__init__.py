@@ -26,3 +26,4 @@ api = swagger.docs(Api(api_blueprint), apiVersion='0.1',
 # Import the resources to add the routes to the blueprint before the app is
 # initialized
 from . import urls  # NOQA
+from . import logs  # NOQA

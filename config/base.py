@@ -7,12 +7,11 @@ class BaseConfig(object):
    # Get app root path, also can use flask.root_path.
    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-   DEBUG = False
-   TESTING = False
-
-   ADMINS = ['pradeep@jaiswar.in']
-
-   # http://flask.pocoo.org/docs/quickstart/#sessions
-   SECRET_KEY = 'secret key'
-
    KAFKA_AUTO_OFFSET_REST = 'earliest'
+
+   #logging setting
+   LOGGING_FORMAT   = '%(asctime)s - %(levelname)s - %(message)s'
+
+   LOGGING_LOCATION =  'logs/application.log'
+
+   LOGGING_LEVEL = 'DEBUG'

@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask
 
 from config.env import get_config
@@ -18,11 +19,10 @@ def create_app():
 
    #create flask app
    app = Flask(appConfig.PROJECT_NAME, instance_path=COMMON_CONSTANTS.INSTANCE_FOLDER_PATH, instance_relative_config=True)
-   configure_app(app, appConfig)
+   configure_app(app,appConfig)
    configure_hook(app)
    register_blueprints(app)
    configure_extensions(app)
-   configure_logging(app)
    configure_error_handlers(app)
    enable_cors(app)
    return app
@@ -46,9 +46,6 @@ def configure_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(api_blueprint)
-
-def configure_logging(app):
-    pass
 
 def enable_cors(app):
     CORS(app)
