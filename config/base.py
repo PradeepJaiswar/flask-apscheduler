@@ -10,7 +10,7 @@ class BaseConfig(object):
    KAFKA_AUTO_OFFSET_REST = 'earliest'
 
    #logging setting
-   LOGGING_FORMAT   = '%(asctime)s - %(levelname)s - %(message)s'
+   LOGGING_FORMAT   = '%(asctime)s %(levelname)-8s %(correlationId)s %(message)s'
 
    LOGGING_LOCATION =  'logs/application.log'
 

@@ -17,9 +17,8 @@ class LogsResource(Resource):
 
         log().info('start making json response')
         response = {
-           'job_id' : 100,
-           'status' : "queued",
-           'description' : 'Your crawling reuest for url  is accpeted',
+           'status' : "logged",
+           'description' : 'this is rest api for logging demo only',
         }
 
         log().info('done making json response')
