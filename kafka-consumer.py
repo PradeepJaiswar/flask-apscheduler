@@ -1,9 +1,8 @@
 import logging, time
 from kafka import KafkaConsumer
 
-from crawl_worker import crawl
+from workers.crawl_worker import crawl
 from config.env import get_config
-from app.constants import constants as COMMON_CONSTANTS
 
 if __name__ == "__main__":
     logging.basicConfig(

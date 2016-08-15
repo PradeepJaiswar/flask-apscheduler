@@ -8,7 +8,6 @@ class DevConfig(BaseConfig):
    # Secret key for signing cookies
    SECRET_KEY = 'development key'
 
-   #CELERY_BROKER_URL =  'amqp://guest@localhost//'
-   CELERY_BROKER_URL =  'redis://localhost:6379/0'
+   KAFKA_CRAWL_TOPIC = 'craw-url'
 
    KAFAK_BOOSTRAP_SERVERS = 'localhost:9092'

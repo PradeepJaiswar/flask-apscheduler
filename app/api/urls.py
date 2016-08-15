@@ -3,7 +3,7 @@ import os
 from flask_restful import reqparse, Resource
 from app.api import api
 
-import crawl_worker
+from workers.crawl_worker import crawl
 from random import randint
 
 #get url from post
@@ -15,7 +15,7 @@ class UrlsResource(Resource):
     def post(self):
         args = parser.parse_args()
         #add celery job here
-        crawl_worker.crawl.delay()
+        crawl.delay(args.url)
         #for now make dummy response with post url parameters
         response = {
            'job_id' : randint(0,1000),

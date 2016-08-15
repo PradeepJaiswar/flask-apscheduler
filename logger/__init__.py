@@ -22,6 +22,9 @@ class log(logging.getLoggerClass()):
 
     def debug(self, message):
         self.root.debug(message)
+        
+    def debug(self, message):
+        self.root.debug(message)
 
     def info(self, message):
         self.root.info(message)
