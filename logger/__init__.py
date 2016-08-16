@@ -1,5 +1,6 @@
 import logging
 from config.env import get_config
+from flask import g
 
 class AppFilter(logging.Filter):
     def filter(self, record):
@@ -10,19 +11,19 @@ class log(logging.getLoggerClass()):
 
     def __init__(self):
         formatter = logging.Formatter(get_config().LOGGING_FORMAT)
-        level = get_config().LOGGING_LEVEL
         self.root.setLevel(get_config().LOGGING_LEVEL)
         self.root.handlers = []
 
         handler = logging.FileHandler(get_config().LOGGING_LOCATION)
         handler.setFormatter(formatter)
+        self.root.addFilter(AppFilter())
+
         self.root.addHandler(handler)
 
-        self.root.addFilter(AppFilter())
 
     def debug(self, message):
         self.root.debug(message)
-        
+
     def debug(self, message):
         self.root.debug(message)
 
@@ -43,4 +44,4 @@ def get_correlation_id():
     """
     Return the correlation Id stored in thread local storage.
     """
-    return 'Q7ASD8AS7D76ASD687'
+    return g.get('correlation_id')

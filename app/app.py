@@ -1,6 +1,6 @@
 import os
 import logging
-from flask import Flask
+from flask import Flask, request, g
 
 from config.env import get_config
 from .constants import constants as COMMON_CONSTANTS
@@ -54,6 +54,7 @@ def enable_cors(app):
 def configure_hook(app):
    @app.before_request
    def before_request():
+      g.correlation_id = get_correlation_id()
       pass
 
 def configure_error_handlers(app):
@@ -61,3 +62,12 @@ def configure_error_handlers(app):
    @app.errorhandler(500)
    def server_error_page(error):
       return "ERROR PAGE!"
+
+def get_correlation_id():
+   #example
+   if request.args.get('correlation_id') is not None:
+      return request.args.get('correlation_id')
+   elif request.form.get('correlation_id') is not None:
+      return request.args.get('correlation_id')
+   else:
+    return "no-correlation_id"

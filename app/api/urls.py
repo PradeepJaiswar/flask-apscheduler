@@ -1,5 +1,6 @@
 import os
 
+from flask import g
 from flask_restful import reqparse, Resource
 from app.api import api
 
@@ -22,6 +23,7 @@ class UrlsResource(Resource):
            'status' : "queued",
            'description' : 'Your crawling reuest for url  is accpeted',
            'env' : os.environ.get('APP_ENV'),
+           'correlation_id' : g.get('correlation_id', None),
 
         }
         return response,200
