@@ -15,6 +15,7 @@ from random import randint
 class UrlsResource(Resource):
     @swagger.doc({
         'tags': ['Urls'],
+        'summary': 'Scrapping url',
         'description': 'This is API will put the specificed url in parameters for scrapping',
         'parameters': [
             {

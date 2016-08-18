@@ -8,6 +8,7 @@ from flask_restful_swagger_2 import swagger
 class LogsResource(Resource):
     @swagger.doc({
         'tags': ['Logs'],
+        'summary': 'Logging demo API',
         'description': 'This api is for logging demo. Once you hit this api end point, logs will be appeded to log/application.log',
         'parameters': [
             {
