@@ -16,7 +16,7 @@ class UrlsResource(Resource):
     @swagger.doc({
         'tags': ['Urls'],
         'summary': 'Scrapping url',
-        'description': 'This is API will put the specificed url in parameters for scrapping',
+        'description': 'This is API will put the specified url in parameters for scrapping',
         'parameters': [
             {
                 'name': 'body',
@@ -37,7 +37,7 @@ class UrlsResource(Resource):
                 'examples': {
                     'application/json': {
                         'id': 1,
-                        "description": "Your crawling reuest for url is accpeted and queued",
+                        "description": "Your crawling request for url is accepted and queued",
                         "job_id": 655,
                         "status": "queued"
                     }
@@ -54,7 +54,7 @@ class UrlsResource(Resource):
            'id'     : randint(0,1000),
            'job_id' : randint(0,1000),
            'status' : "queued",
-           'description' : 'Your crawling reuest for url  is accpeted',
+           'description' : 'Your crawling request for url  is accepted',
         }
         return response,200
 

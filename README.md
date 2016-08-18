@@ -2,12 +2,10 @@
 
 #### Install dependencies
 ```
-$ virtualenv .pyenv
-$ source .pyenv/bin/activate
 $ pip install -r requirements/base.txt
 ```
 
-#### Run
+#### for Running on localhost
 
 ```
 $ python run.py
@@ -15,5 +13,4 @@ $ python run.py
 * Restarting with stat
 ```
 
-Now hit `http://localhost:5000/v1/api/users` in your browser
-Now hit `http://localhost:5000/v1/api/customers` in your browser
+Now hit `http://localhost:5000/v1/api/logs` in your browser
