@@ -7,7 +7,3 @@ class DevConfig(BaseConfig):
 
    # Secret key for signing cookies
    SECRET_KEY = 'development key'
-
-   KAFKA_CRAWL_TOPIC = 'craw-url'
-
-   KAFAK_BOOSTRAP_SERVERS = 'localhost:9092'
