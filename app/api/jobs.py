@@ -43,12 +43,49 @@ def publish_on_kafka(arg):
 
 
 class JobsResource(Resource):
-
+    @swagger.doc({
+        'tags': ['Jobs'],
+        'summary': 'Reschedules a job',
+        'description': "Reschedules job on specified run_time parameter",
+        'parameters': [
+            {
+                'name': 'body',
+                'default': '{"job_id":"87b8e099d7d147c993de0bf48df5de5a", "run_date": "2016-08-25 12:49:37"}',
+                'description': 'Pass as raw body data',
+                'in': 'body',
+                'required': 'true',
+                'type': 'json',
+                'schema': {
+                     "properties": {}
+                  }
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Jobs',
+                'schema': {},
+                'examples': {
+                    'application/json': {
+                         	'data': {
+                                "action": "start",
+                                "args": "[{\"run_date\": \"2016-08-25 12:49:37\", \"url\": \"http://google.com\"}]",
+                                "executor": "default",
+                                "job_id": "87b8e099d7d147c993de0bf48df5de5a",
+                                "job_name": "publish_on_kafka",
+                                "next_run_time": "2016-08-25 12:49:37+00:00",
+                                "run_date": "2016-08-25 12:49:37",
+                                "url": "http://google.com"
+                            }
+                    }
+                }
+            }
+        }
+     })
     def put(self):
         #get post  parameters
         json_params  = json.loads(request.data)
         #check for url parameters
-        if 'job_id' in json_params and json_params['job_id'] is not None:
+        if 'job_id' in json_params and json_params['job_id'] is not None and 'run_date' in json_params and json_params['run_date'] is not None:
             #get job id
             job_id =  json_params['job_id']
             #get job info
@@ -81,7 +118,38 @@ class JobsResource(Resource):
                 return {'error': 'no job found maching this job_id'}, 200
         else:
             return {'msg': 'Invalid parameters'} ,200
-
+    @swagger.doc({
+        'tags': ['Jobs'],
+        'summary': 'Delete job',
+        'description': "Removes job from job store",
+        'parameters': [
+            {
+                'name': 'job_id',
+                'description': 'job_id provided while creating job',
+                'in': 'query',
+                'required': 'true',
+                'type': 'string',
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Jobs',
+                'schema': {},
+                'examples': {
+                    'application/json': {
+                         	'data': {
+                                 "args": "[{\"run_date\": \"2016-08-27 12:49:37\", \"url\": \"http://google.com\"}]",
+                                 "executor": "default",
+                                 "job_id": "562103739b294f298056e2d1eedd6ed9",
+                                 "job_name": "publish_on_kafka",
+                                 "next_run_time": "2016-08-27 12:49:37+00:00",
+                                 "run_date": "2016-08-27 12:49:37+00:00"
+                            }
+                    }
+                }
+            }
+        }
+     })
     def delete(self):
          #get job_id from get
          job_id =request.args.get('job_id')
@@ -109,6 +177,38 @@ class JobsResource(Resource):
          else:
             return {'error': 'job_id not found in parameters'}, 200
 
+    @swagger.doc({
+        'tags': ['Jobs'],
+        'summary': 'Get job',
+        'description': "Get information about already scheduled job",
+        'parameters': [
+            {
+                'name': 'job_id',
+                'description': 'job_id provided while creating job',
+                'in': 'query',
+                'required': 'true',
+                'type': 'string',
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Jobs',
+                'schema': {},
+                'examples': {
+                    'application/json': {
+                         	'data': {
+                                 "args": "[{\"run_date\": \"2016-08-27 12:49:37\", \"url\": \"http://google.com\"}]",
+                                 "executor": "default",
+                                 "job_id": "562103739b294f298056e2d1eedd6ed9",
+                                 "job_name": "publish_on_kafka",
+                                 "next_run_time": "2016-08-27 12:49:37+00:00",
+                                 "run_date": "2016-08-27 12:49:37+00:00"
+                            }
+                    }
+                }
+            }
+        }
+     })
     def get(self):
          #get job_id from get
          job_id =request.args.get('job_id')
@@ -142,6 +242,44 @@ class JobsResource(Resource):
                      }
                  },200
 
+    @swagger.doc({
+        'tags': ['Jobs'],
+        'summary': 'Create new job',
+        'description': "Create and schedules a new job specified in run_time parameters, if run_time is not provided job will be Schedules immediately using python datetime.now()",
+        'parameters': [
+            {
+                'name': 'body',
+                'default': '{"url":"http://google.com", "run_date": "2016-08-25 12:49:37"}',
+                'description': 'Pass as raw body data',
+                'in': 'body',
+                'required': 'true',
+                'type': 'json',
+                'schema': {
+                     "properties": {}
+                  }
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Jobs',
+                'schema': {},
+                'examples': {
+                    'application/json': {
+                         	'data': {
+                                "action": "start",
+                                "args": "[{\"run_date\": \"2016-08-25 12:49:37\", \"url\": \"http://google.com\"}]",
+                                "executor": "default",
+                                "job_id": "87b8e099d7d147c993de0bf48df5de5a",
+                                "job_name": "publish_on_kafka",
+                                "next_run_time": "2016-08-25 12:49:37+00:00",
+                                "run_date": "2016-08-25 12:49:37",
+                                "url": "http://google.com"
+                            }
+                    }
+                }
+            }
+        }
+     })
     def post(self):
         #get post  parameters
         json_params  = json.loads(request.data)
