@@ -6,3 +6,4 @@ flask_restful_swagger_2
 redis
 flask_cors
 Celery
+Flask-APScheduler

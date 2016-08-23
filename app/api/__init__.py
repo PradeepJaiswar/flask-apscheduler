@@ -17,3 +17,4 @@ api = Api(api_blueprint, api_version=get_config().API_VERSION,
 # Import the resources to add the routes to the blueprint before the app is
 # initialized
 from . import logs  # NOQA
+from . import jobs  # NOQA
